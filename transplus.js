@@ -12,25 +12,30 @@ var targetLang = "en";
 
 var setQueryString = function(message, targetLang) {
   return "http://query.yahooapis.com/v1/public/yql?q=" +
-    encodeURIComponent("select json.json.json from google.translate where q='" + addslashes(message.text) + "' and source='" + message.userlang + "' and target='" + targetLang + "' limit 1") +
+    encodeURIComponent("select json from google.translate where q='" + addslashes(message.text) + "' and source='" + message.userlang + "' and target='" + targetLang + "' limit 1") +
       "&format=json&env=store://datatables.org/alltableswithkeys&callback=?";
 };
 
+var extractResult = function(data) {
+  return data.query.results.json.json.json.length && ""+$.map(data.query.results.json.json.json, function(v) { return v.json[0]; }).join('') || data.query.results.json.json.json.json[0];
+};
+
 var translateFinalLang=function(data) {
-  var post=data.query.results.json.json.json.json;
+  var post=extractResult(data);
   console.log(post);
   $(".translateResult").text(post);
 };
 var translateInterLang=function(data) {
-  var post=data.query.results.json.json.json.json;
+  var post=extractResult(data);
   console.log(post);
   message.text = post;
   message.userlang = interLang;
+  $(".translateJapanResult").text(post);
   $.getJSON(setQueryString(message, targetLang), translateFinalLang);
 };
 
 var translateDirectLang=function(data) {
-  var post=data.query.results.json.json.json.json;
+  var post=extractResult(data);
   $(".translateDirectResult").text(post);
 };
 
