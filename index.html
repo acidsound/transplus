@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>여러분이 몰랐던 구글 번역기</title>
+<title>여러분이 몰랐던 구글 번역기</title>  
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<style>
+  body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+  }
+  .sourceText {
+    width: 100%;
+    height: 80px;
+  }  
+</style>  
 <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
 <meta name="description" content="여러분이 몰랐던 구글 번역기" />
@@ -12,12 +21,21 @@
 <title></title>
 </head>
 <body>
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">transPlus</a>
+        <div class="nav-collapse collapse">
+        </div>
+      </div>
+    </div>
+  </div>  
   <div class="container">
   <div class="hero-unit">
     <h3>여러분이 몰랐던 구글 번역기</h3>
   </div>
   <form class="form-search">
-    <input class="input input-xxlarge sourceText" placeholder="번역할 문장을 입력하세요..."/>
+    <textarea class="input input-xxlarge sourceText" placeholder="번역할 문장을 입력하세요...">여러분이 몰랐던 구글 번역기</textarea>
   <select id="userLang" class="input-small">  
     <option selected value="ko">한국어</option>
     <option value="zh-CN">Chinese</option> 
@@ -46,15 +64,15 @@
   </select>   
   <button class="btn btn-primary">번역시작</button>
   </form>
-    <span>직접번역</span>
+  <span>직접번역</span>
   <pre class="translateDirectResult">
-     직접 번역한 결과가 나타납니다.
-  </pre>
-    <span>일본어 중간번역</span>
+     직접 번역한 결과가 나타납니다.</pre>
+  <span>일본어 중간번역</span>
   <pre class="translateResult">
-     중간 언어인 일본어로 번역 후 최종 언어로 번역됩니다.
-  </pre>
+     중간 언어인 일본어로 번역 후 최종 언어로 번역됩니다.</pre>
+  <span>일본어 번역</span>
+  <pre class="translateJapanResult">
+     일본어 번역 결과가 나타납니다.</pre>
   </div>
-<script src="./transplus.js"></script>
 </body>
 </html>
