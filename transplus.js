@@ -17,7 +17,7 @@ var setQueryString = function(message, targetLang) {
 };
 
 var extractResult = function(data) {
-  return data.query.results.json.json.json.length && ""+$.map(data.query.results.json.json.json, function(v) { return v.json[0]; }).join('') || data.query.results.json.json.json.json[0];
+  return data.query.results && (data.query.results.json.json.json.length && ""+$.map(data.query.results.json.json.json, function(v) { return v.json[0]; }).join('') || data.query.results.json.json.json.json[0]);
 };
 
 var translateFinalLang=function(data) {
