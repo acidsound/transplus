@@ -1,11 +1,7 @@
-function addslashes(str) {
-    return (str + '').replace(/([\\'])/g, "\\$1").replace(/\0/g, "\\0");
-}
-
 var interlang = "ja";
 
 var setQueryString = function(message) {
-  var result = "http://goxcors.appspot.com/post?http://translate.google.com/translate_a/t?client=x"+
+  var result = "http://localhost:8080/post?http://translate.google.com/translate_a/t?client=x"+
     "&sl="+message.userlang+"&tl="+message.targetlang+
     "&text="+encodeURIComponent(message.text)
   return result;
