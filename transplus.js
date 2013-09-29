@@ -2,36 +2,30 @@ function addslashes(str) {
     return (str + '').replace(/([\\'])/g, "\\$1").replace(/\0/g, "\\0");
 }
 
-var message = {
-  text: "안녕하세요",
-  userlang: "ko"
-};
+var interlang = "ja";
 
-var interLang = "ja";
-var targetLang = "en";
-
-var setQueryString = function(message, targetLang) {
-  return "http://query.yahooapis.com/v1/public/yql?q=" +
-    encodeURIComponent("select json from google.translate where q='" + addslashes(message.text) + "' and source='" + message.userlang + "' and target='" + targetLang + "' limit 1") +
-      "&format=json&env=store://datatables.org/alltableswithkeys&callback=?";
+var setQueryString = function(message) {
+  var result = "http://localhost:8080/post?http://translate.google.com/translate_a/t?client=x"+
+    "&sl="+message.userlang+"&tl="+message.targetlang+
+    "&text="+encodeURIComponent(message.text)
+  return result;
 };
 
 var extractResult = function(data) {
-  return data.query.results && (data.query.results.json.json.json.length && ""+$.map(data.query.results.json.json.json, function(v) { return v.json[0]; }).join('') || data.query.results.json.json.json.json[0]);
+  return data && data.sentences && $.map(data.sentences, (function(v) { return v.trans })).join('');
 };
 
 var translateFinalLang=function(data) {
   var post=extractResult(data);
-  console.log(post);
   $(".translateResult").text(post);
 };
 var translateInterLang=function(data) {
   var post=extractResult(data);
-  console.log(post);
   message.text = post;
-  message.userlang = interLang;
+  message.userlang = interlang;
+  message.targetlang = $("#targetLang").val();
   $(".translateJapanResult").text(post);
-  $.getJSON(setQueryString(message, targetLang), translateFinalLang);
+  $.getJSON(setQueryString(message, interlang), translateFinalLang);
 };
 
 var translateDirectLang=function(data) {
@@ -42,13 +36,12 @@ var translateDirectLang=function(data) {
 $("form").submit(function() {
   message = {
     text: $(".sourceText").val(),
-    userlang: $("#userLang").val()
+    userlang: $("#userLang").val(),
+    targetlang: $("#targetLang").val()
   };
-  console.log("번역시작");
-  console.log(message);
-  targetLang = $("#targetLang").val();
-  $.getJSON(setQueryString(message, interLang), translateInterLang);
-  $.getJSON(setQueryString(message, targetLang), translateDirectLang);
+  $.getJSON(setQueryString(message), translateDirectLang);
+  message.targetlang = interlang;
+  $.getJSON(setQueryString(message), translateInterLang);
   return false;
 });
 
