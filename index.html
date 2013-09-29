@@ -11,11 +11,21 @@
   .sourceText {
     width: 100%;
     height: 80px;
-  }  
-</style>  
+  }
+  .hero-unit {
+    padding:20px;
+  }
+</style>
 <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap.js"></script>
 <sciprt src="https://raw.github.com/aFarkas/html5shiv/master/dist/html5shiv.js"></sciprt>
+<style>
+  @media (min-width: 1200px) {
+    .row {
+      margin-left: 0px;
+    }
+  }
+</style>
 <meta name="description" content="여러분이 몰랐던 구글 번역기" />
 <meta charset=utf-8 />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -36,58 +46,62 @@
   </div>
   <form class="form-search">
     <textarea class="input input-xxlarge sourceText" placeholder="번역할 문장을 입력하세요..."></textarea>
-  <select id="userLang" class="input-small">  
-    <option selected value="">자동인식</option>
-    <option value="ko">한국어</option>
-    <option value="zh-CN">Chinese</option> 
-    <option value="da">Danish</option>
-    <option value="en">English</option> 
-    <option value="fr">French</option>
-    <option value="de">German</option>  
-    <option value="it">Italian</option>  
-    <option value="ja">Japanese</option>
-    <option value="ru">Russian</option>  
-    <option value="es">Spanish</option>  
-    <option value="pt">Portuguese</option> 
-  </select>
-  <select id="targetLang" class="input-small">
-    <option value="ko">한국어</option>
-    <option value="zh-CN">Chinese</option> 
-    <option value="da">Danish</option>
-    <option selected value="en">English</option> 
-    <option value="fr">French</option>
-    <option value="de">German</option>  
-    <option value="it">Italian</option>  
-    <option value="ja">Japanese</option>
-    <option value="ru">Russian</option>  
-    <option value="es">Spanish</option>  
-    <option value="pt">Portuguese</option> 
-  </select>
-  중간번역언어
-  <select id="interLang" class="input-small">
-    <option value="ko">한국어</option>
-    <option value="zh-CN">Chinese</option>
-    <option value="da">Danish</option>
-    <option value="en">English</option>
-    <option value="fr">French</option>
-    <option value="de">German</option>
-    <option value="it">Italian</option>
-    <option selected value="ja">Japanese</option>
-    <option value="ru">Russian</option>
-    <option value="es">Spanish</option>
-    <option value="pt">Portuguese</option>
-  </select>
-  <button class="btn btn-primary">번역시작</button>
+    <div class="row pull-left">
+      <select id="userLang" class="input-small">
+        <option selected value="">자동인식</option>
+        <option value="ko">한국어</option>
+        <option value="zh-CN">Chinese</option>
+        <option value="da">Danish</option>
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="it">Italian</option>
+        <option value="ja">Japanese</option>
+        <option value="ru">Russian</option>
+        <option value="es">Spanish</option>
+        <option value="pt">Portuguese</option>
+      </select>
+      <select id="targetLang" class="input-small">
+        <option value="ko">한국어</option>
+        <option value="zh-CN">Chinese</option>
+        <option value="da">Danish</option>
+        <option selected value="en">English</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="it">Italian</option>
+        <option value="ja">Japanese</option>
+        <option value="ru">Russian</option>
+        <option value="es">Spanish</option>
+        <option value="pt">Portuguese</option>
+      </select>
+    </div>
+    <div class="row pull-right">
+      <span>중간 번역 언어</span>
+      <select id="interLang" class="input-small">
+        <option value="ko">한국어</option>
+        <option value="zh-CN">Chinese</option>
+        <option value="da">Danish</option>
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="it">Italian</option>
+        <option selected value="ja">Japanese</option>
+        <option value="ru">Russian</option>
+        <option value="es">Spanish</option>
+        <option value="pt">Portuguese</option>
+      </select>
+    </div>
+    <button class="btn btn-primary">번역시작</button>
   </form>
   <span>직접번역</span>
   <pre class="translateDirectResult">
      직접 번역한 결과가 나타납니다.</pre>
-  <span>일본중계번역</span>
+  <span>중계번역</span>
   <pre class="translateResult">
-     중간 언어인 일본어로 번역 후 최종 언어로 번역됩니다.</pre>
-  <span>(참고)일본어 번역</span>
-  <pre class="translateJapanResult">
-     일본어 번역 결과가 나타납니다.</pre>
+     중간 언어로 번역 후 최종 언어로 번역됩니다.</pre>
+  <span>(참고)중간 언어 번역</span>
+  <pre class="translateInterResult">
+     중간 언어 번역 결과가 나타납니다.</pre>
   </div>
   <a href="https://github.com/acidsound/transplus"><img style="position: absolute; z-index:9999; top: 0px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 

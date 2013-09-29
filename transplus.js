@@ -1,5 +1,3 @@
-var interlang = "ja";
-
 var isCORSSupport = 'withCredentials' in new XMLHttpRequest();
 var isIE = typeof XDomainRequest !== "undefined";
 var xdr;
@@ -47,9 +45,9 @@ var translateFinalLang=function(data) {
 var translateInterLang=function(data) {
   var post=extractResult(data);
   message.text = post;
-  message.userlang = interlang;
+  message.userlang = $("#interLang").val();;
   message.targetlang = $("#targetLang").val();
-  $(".translateJapanResult").text(post);
+  $(".translateInterResult").text(post);
   getJSON(setQueryString(message), translateFinalLang);
 };
 
@@ -65,7 +63,7 @@ $("form").submit(function() {
     targetlang: $("#targetLang").val()
   };
   getJSON(setQueryString(message), translateDirectLang);
-  message.targetlang = interlang;
+  message.targetlang = $("#interLang").val();
   getJSON(setQueryString(message), translateInterLang);
   return false;
 });
