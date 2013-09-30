@@ -15,6 +15,10 @@
   .hero-unit {
     padding:20px;
   }
+  .kakaolink {
+    height: 22px;
+    margin-left: 10px;
+  }
 </style>
 <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap.js"></script>
@@ -114,11 +118,28 @@
     <a class="addthis_button_linkedin_counter"></a>
     <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
     <a class="addthis_counter addthis_pill_style"></a>
+    <a class="pull-left" href="javascript:executeURLLink()">
+      <img class="kakaolink" src="/images/kakaotalk_button_small.png"/>
+    </a>
   </div>
   <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52490a34017d8217"></script>
   <!-- AddThis Button END -->
   <script src="./transplus.js"></script>
+  <script type="text/javascript" src="./lib/kakao.link.js"></script>
+  <script type="text/javascript">
+    function executeURLLink()
+    {
+      kakao.link("talk").send({
+        msg : "이런 번역기 어때? 나도 몰랐던 구글 번역기\n ",
+        url : "http://acidsound.github.io/transplus",
+        appid : "transplus.appsoulute.com.",
+        appver : "2.0",
+        appname : "transplus",
+        type : "link"
+      });
+    }
+  </script>
   <script type="text/javascript">
   
     var _gaq = _gaq || [];

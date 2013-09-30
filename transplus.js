@@ -67,6 +67,3 @@ $("form").submit(function() {
   getJSON(setQueryString(message), translateInterLang);
   return false;
 });
-
-/* ? 이후에 문장이 있으면 반영 */
-$(".sourceText").val(decodeURIComponent(document.location.search.substr(1)));
