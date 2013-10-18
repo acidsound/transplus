@@ -2,6 +2,9 @@ var isCORSSupport = 'withCredentials' in new XMLHttpRequest();
 var isIE = typeof XDomainRequest !== "undefined";
 var xdr;
 var interBuffer = [];
+var finalBuffer = [];
+var bufCnt = 0;
+
 var getJSON = function(query, callback) {
   if (isCORSSupport) {
     $.getJSON(query, callback);
@@ -38,29 +41,32 @@ var extractResult = function(data) {
   return data && data.sentences && $.map(data.sentences, (function(v) { return v.trans }));
 };
 
-var translateLineByLine=function() {
-  var post = interBuffer.shift(0);
-
-  message.text = post + "|!";
+var translateLineByLine=function(i, buffer) {
+  message.text = buffer + "|!";
   message.userlang = $("#interLang").val();
   message.targetlang = $("#targetLang").val();
+  var translateFinalLang=function(data) {
+    var post=extractResult(data).join('');
+    // prevent to trim new line
+    bufCnt--;
+    finalBuffer[i]=post.replace(/\|!/g, "");
+    if (!bufCnt) {
+      $(".translateResult").text(finalBuffer.join(""));
+    }
+  };
   getJSON(setQueryString(message), translateFinalLang);
 };
 
-var translateFinalLang=function(data) {
-  var post=extractResult(data).join('');
-  // prevent to trim new line
-  $(".translateResult").text($(".translateResult").text()+post.replace(/\|!/g, ""));
-  if (interBuffer.length>0) {
-    translateLineByLine();
-  }
-};
 
 var translateInterLang=function(data) {
   interBuffer=extractResult(data);
   $(".translateInterResult").text(interBuffer.join(""));
 
-  translateLineByLine();
+  bufCnt = finalBuffer.length = interBuffer.length;
+
+  for (var i in interBuffer) {
+    translateLineByLine(i, interBuffer[i]);
+  }
 };
 
 var translateDirectLang=function(data) {
