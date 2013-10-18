@@ -1,7 +1,7 @@
 var isCORSSupport = 'withCredentials' in new XMLHttpRequest();
 var isIE = typeof XDomainRequest !== "undefined";
 var xdr;
-
+var interBuffer = [];
 var getJSON = function(query, callback) {
   if (isCORSSupport) {
     $.getJSON(query, callback);
@@ -35,24 +35,36 @@ var extractResult = function(data) {
   if (!isCORSSupport && isIE) {
     data = $.parseJSON(data.responseText);
   }
-  return data && data.sentences && $.map(data.sentences, (function(v) { return v.trans })).join('');
+  return data && data.sentences && $.map(data.sentences, (function(v) { return v.trans }));
 };
 
-var translateFinalLang=function(data) {
-  var post=extractResult(data);
-  $(".translateResult").text(post);
-};
-var translateInterLang=function(data) {
-  var post=extractResult(data);
-  message.text = post;
-  message.userlang = $("#interLang").val();;
+var translateLineByLine=function() {
+  var post = interBuffer.shift(0);
+
+  message.text = post + "|!";
+  message.userlang = $("#interLang").val();
   message.targetlang = $("#targetLang").val();
-  $(".translateInterResult").text(post);
   getJSON(setQueryString(message), translateFinalLang);
 };
 
+var translateFinalLang=function(data) {
+  var post=extractResult(data).join('');
+  // prevent to trim new line
+  $(".translateResult").text($(".translateResult").text()+post.replace(/\|!/g, ""));
+  if (interBuffer.length>0) {
+    translateLineByLine();
+  }
+};
+
+var translateInterLang=function(data) {
+  interBuffer=extractResult(data);
+  $(".translateInterResult").text(interBuffer.join(""));
+
+  translateLineByLine();
+};
+
 var translateDirectLang=function(data) {
-  var post=extractResult(data);
+  var post=extractResult(data).join('');
   $(".translateDirectResult").text(post);
 };
 
@@ -64,6 +76,8 @@ $("form").submit(function() {
   };
   getJSON(setQueryString(message), translateDirectLang);
   message.targetlang = $("#interLang").val();
+  interBuffer.length = 0;
+  $(".translateResult").text("");
   getJSON(setQueryString(message), translateInterLang);
   return false;
 });
