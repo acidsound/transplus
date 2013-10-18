@@ -50,9 +50,7 @@ var translateLineByLine=function(i, buffer) {
     // prevent to trim new line
     bufCnt--;
     finalBuffer[i]=post.replace(/\|!/g, "");
-    if (!bufCnt) {
-      $(".translateResult").text(finalBuffer.join(""));
-    }
+    $(".translateResult").text(finalBuffer.join(""));
   };
   getJSON(setQueryString(message), translateFinalLang);
 };
@@ -86,4 +84,8 @@ $("form").submit(function() {
   $(".translateResult").text("");
   getJSON(setQueryString(message), translateInterLang);
   return false;
+});
+
+$().ready(function() {
+  $("#targetLang").val(navigator.userLanguage || navigator.language || "ko");
 });
