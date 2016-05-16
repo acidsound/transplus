@@ -4,6 +4,10 @@
     *zoom: 1;
 }
 
+.jumbotron {
+  padding: 1em;
+}
+
 textarea,
 .flex-text-wrap {
     outline: 0;
