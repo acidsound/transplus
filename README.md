@@ -10,4 +10,4 @@ feature
 
 Demo
 =======
-https://acidsound.github.com/transplus/
+https://acidsound.github.io/transplus/
