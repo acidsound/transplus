@@ -34,6 +34,10 @@
 	body {
 		padding-bottom: 5em;
 	}
+  .gitbuttons>iframe {
+    float: right;
+    margin-left: 0.1em;
+  }
 </style>
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.0/es6-promise.auto.min.js"></script>
@@ -43,6 +47,10 @@
 <body>
   <div class="틀">
     <h4>여러분이 몰랐던 구글 번역기 v2</h4>
+    <div class="gitbuttons">
+      <a class="github-button" href="https://github.com/acidsound/transplus" data-icon="octicon-star" data-count-href="/acidsound/transplus/stargazers" data-count-api="/repos/acidsound/transplus#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star acidsound/transplus on GitHub">Star</a>
+      <a class="github-button" href="https://github.com/acidsound/transplus/issues" data-count-api="/repos/acidsound/transplus#open_issues_count" data-count-aria-label="# issues on GitHub" aria-label="Issue acidsound/transplus on GitHub">Issue</a>
+    </div>
     <p>styled by <a href="https://github.com/acidsound/Tle-CSS">TleCSS</a></p>
     <form>
       <textarea id="sourceText" placeholder="번역할 문장을 입력하세요..."></textarea>
@@ -123,5 +131,6 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
