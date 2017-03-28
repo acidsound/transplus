@@ -1,10 +1,3 @@
-var isCORSSupport = 'withCredentials' in new XMLHttpRequest();
-var isIE = typeof XDomainRequest !== "undefined";
-var xdr;
-var interBuffer = [];
-var finalBuffer = [];
-var bufCnt = 0;
-
 $("form").submit(function() {
   var message = {
     text: $("#sourceText").val(),
