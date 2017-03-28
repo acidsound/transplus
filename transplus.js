@@ -5,87 +5,35 @@ var interBuffer = [];
 var finalBuffer = [];
 var bufCnt = 0;
 
-var getJSON = function(query, callback) {
-  if (isCORSSupport) {
-    $.getJSON(query, callback);
-  } else if (isIE) {
-    xdr = new XDomainRequest();
-    if (xdr) {
-      xdr.onload = callback;
-      xdr.open("get", query);
-      xdr.send();
-    }
-  } else {
-    $.ajax({
-      type: "GET",
-      dataType: "jsonp",
-      jsonp: "callback",
-      url: query,
-      success: callback
-    });
-  }
-}
-
-var setQueryString = function(message) {
-  var result = "http://goxcors.appspot.com/cors?method=GET" +
-    "&url=" + encodeURIComponent("http://translate.google.com/translate_a/t?client=x" +
-    "&sl=" + message.userlang + "&tl=" + message.targetlang+
-    "&text=" + encodeURIComponent(message.text));
-  return result;
-};
-
-var extractResult = function(data) {
-  if (!isCORSSupport && isIE) {
-    data = $.parseJSON(data.responseText);
-  }
-  return data && data.sentences && $.map(data.sentences, (function(v) { return v.trans }));
-};
-
-var translateLineByLine=function(i, buffer) {
-  message.text = buffer + "|!";
-  message.userlang = $("#interLang").val();
-  message.targetlang = $("#targetLang").val();
-  var translateFinalLang=function(data) {
-    var post=extractResult(data).join('');
-    // prevent to trim new line
-    bufCnt--;
-    finalBuffer[i]=post.replace(/\|!/g, "");
-    $(".translateResult").text(finalBuffer.join(""));
-  };
-  getJSON(setQueryString(message), translateFinalLang);
-};
-
-
-var translateInterLang=function(data) {
-  interBuffer=extractResult(data);
-  $(".translateInterResult").text(interBuffer.join(""));
-
-  bufCnt = finalBuffer.length = interBuffer.length;
-
-  for (var i in interBuffer) {
-    translateLineByLine(i, interBuffer[i]);
-  }
-};
-
-var translateDirectLang=function(data) {
-  var post=extractResult(data).join('');
-  $(".translateDirectResult").text(post);
-};
-
 $("form").submit(function() {
-  message = {
-    text: $(".sourceText").val(),
+  var message = {
+    text: $("#sourceText").val(),
     userlang: $("#userLang").val(),
+    interlang: $("#interLang").val(),
     targetlang: $("#targetLang").val()
   };
-  getJSON(setQueryString(message), translateDirectLang);
-  message.targetlang = $("#interLang").val();
-  interBuffer.length = 0;
-  $(".translateResult").text("");
-  getJSON(setQueryString(message), translateInterLang);
+  translate(message.text, message.userlang, message.targetlang).then(function(o) {
+    $("#translateDirectResult").text(o);
+  });
+  translate(message.text, message.userlang, message.interlang).then(function(o) {
+    translate(o, message.interlang, message.targetlang).then(function(p) {
+      $("#translateResult").text(o);
+      $("#translateInterResult").text(p);
+    });
+  });
   return false;
 });
 
 $().ready(function() {
+  var resizeTextArea=function() {
+    var o = this;
+    setTimeout(function() {
+      o.style.cssText = 'height:auto; padding:0';
+      o.style.cssText = 'height:' + (o.scrollHeight + parseFloat(getComputedStyle(o).fontSize))+ 'px';
+    }, 0);
+  };
+  $("#sourceText").bind("paste", resizeTextArea);
+  $("#sourceText").bind("cut", resizeTextArea);
+  $("#sourceText").bind("keydown", resizeTextArea);
   $("#targetLang").val(navigator.userLanguage || navigator.language || "ko");
 });
