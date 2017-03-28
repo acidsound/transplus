@@ -76,29 +76,30 @@
 	    <a class="addthis_button_linkedin_counter"></a>
 	    <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
 	    <a class="addthis_counter addthis_pill_style"></a>
-	    <a href="javascript:executeURLLink()">
-	      <img class="kakaolink" src="./images/kakaotalk_button_small.png"/>
+	    <a id="kakao-link-btn" href="javascript:;">
+	      <img class="kakaolink" src="https://dev.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
 	    </a>
 	  </div>
   </div>
   <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52490a34017d8217"></script>
+  <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52490a34017d8217"></script>
   <!-- AddThis Button END -->
   <script src="./lib/translate.js"></script>
   <script src="./transplus.js"></script>
-  <script type="text/javascript" src="./lib/kakao.link.js"></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script type="text/javascript">
-    function executeURLLink()
-    {
-      kakao.link("talk").send({
-        msg : "이런 번역기 어때? 나도 몰랐던 구글 번역기\n ",
-        url : "https://acidsound.github.io/transplus",
-        appid : "transplus.appsoulute.com.",
-        appver : "2.0",
-        appname : "transplus",
-        type : "link"
-      });
-    }
+    Kakao.init('d03fadb944e6e53990669533906ac709');
+    Kakao.Link.createTalkLinkButton({
+      container: '#kakao-link-btn',
+	    label: "이런 번역기 어때? 나도 몰랐던 구글 번역기",
+      image: {
+
+      },
+      webButton: {
+        text: 'appsoulute',
+        url: 'https://acidsound.github.io/transplus'
+      }
+    });
   </script>
   <script type="text/javascript">
     var _gaq = _gaq || [];
