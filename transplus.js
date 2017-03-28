@@ -36,4 +36,5 @@ $().ready(function() {
   $("#sourceText").bind("cut", resizeTextArea);
   $("#sourceText").bind("keydown", resizeTextArea);
   $("#targetLang").val(navigator.userLanguage || navigator.language || "ko");
+  $('#sourceText').focus();
 });
