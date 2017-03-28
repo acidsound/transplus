@@ -4,92 +4,85 @@
 <title>여러분이 몰랐던 구글 번역기 v2</title>
 <meta name="google-translate-customization" content="5136a603e662fe9c-554731df28f27aa5-g9475666b67cebed8-1d" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="https://cdn.rawgit.com/acidsound/Tle-CSS/master/dist/tle.css">
-<script src="https://code.jquery.com/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.0/es6-promise.auto.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<sciprt src="https://raw.github.com/aFarkas/html5shiv/master/dist/html5shiv.js"></sciprt>
 <meta name="description" content="여러분이 몰랐던 구글 번역기" />
 <meta name="google" value="notranslate">
 <meta charset=utf-8 />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta property="fb:app_id" content="APP_ID" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="여러분이 몰랐던 구글 번역기" />
+<meta property="og:url" content="https://acidsound.github.io/transplus" />
+<meta property="og:description" content="Google translation that you did not know. 문장을 중간 언어로 번역 후 목적 언어로 다시 번역합니다." />
+<link rel="stylesheet" href="https://cdn.rawgit.com/acidsound/Tle-CSS/master/dist/tle.css">
 <style>
-  pre {
-    padding: 1em;
-  }
+	pre {
+		padding: 1em;
+	}
+	.kakaolink {
+		height: 22px;
+	}
 </style>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.0/es6-promise.auto.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 </head>
 <body>
-  <div class="container">
+  <div class="틀">
     <h3>여러분이 몰랐던 구글 번역기 v2</h3>
     <p>styled by <a href="https://github.com/acidsound/Tle-CSS">TleCSS</a></p>
-    <form class="form-inline" role="form">
-      <div class="wrap">
-        <textarea id="sourceText" class="form-control" placeholder="번역할 문장을 입력하세요..."></textarea>
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label class="sr-only" for="userLang">sourceLang</label>
-          <select id="userLang" class="form-control">
-            <option selected value="">자동인식</option>
-            <option value="ko">한국어</option>
-            <option value="en">English</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="km">Khmer</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="ms">Malay</option><option value="mt">Maltese</option><option value="mr">Marathi</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="vi">Vietnamese</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="sr-only" for="targetLang">targetLang</label>
-          <select id="targetLang" class="form-control">
-            <option selected value="ko">한국어</option>
-            <option value="en">English</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="km">Khmer</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="ms">Malay</option><option value="mt">Maltese</option><option value="mr">Marathi</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="vi">Vietnamese</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary">번역시작</button>
-        </div>
-        <div class="form-group pull-right">
-          <label for="interLang" class="col-lg-5 text-right">중간 번역 언어</label>
-          <div class="col-lg-6">
-            <select id="interLang" class="form-control">
-              <option value="ko">한국어</option>
-              <option selected value="ja">Japanese</option>
-              <option value="en">English</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="km">Khmer</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="ms">Malay</option><option value="mt">Maltese</option><option value="mr">Marathi</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="vi">Vietnamese</option>
-            </select>
-          </div>
-        </div>
-      </div>
+    <form>
+      <textarea id="sourceText" placeholder="번역할 문장을 입력하세요..."></textarea>
+      <label for="userLang">sourceLang</label>
+      <select id="userLang">
+        <option selected value="">자동인식</option>
+        <option value="ko">한국어</option>
+        <option value="en">English</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="km">Khmer</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="ms">Malay</option><option value="mt">Maltese</option><option value="mr">Marathi</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="vi">Vietnamese</option>
+      </select>
+      <label for="targetLang">targetLang</label>
+      <select id="targetLang">
+        <option selected value="ko">한국어</option>
+        <option value="en">English</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="km">Khmer</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="ms">Malay</option><option value="mt">Maltese</option><option value="mr">Marathi</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="vi">Vietnamese</option>
+      </select>
+      <button>번역시작</button>
+      <label for="interLang">중간 번역 언어</label>
+      <select id="interLang">
+        <option value="ko">한국어</option>
+        <option selected value="ja">Japanese</option>
+        <option value="en">English</option><option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="tl">Filipino</option><option value="fi">Finnish</option><option value="fr">French</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="iw">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="jw">Javanese</option><option value="kn">Kannada</option><option value="km">Khmer</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="mk">Macedonian</option><option value="ms">Malay</option><option value="mt">Maltese</option><option value="mr">Marathi</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sr">Serbian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="ta">Tamil</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="vi">Vietnamese</option>
+      </select>
     </form>
-    <div class="translatorHeader">
+    <div>
       <span>직접번역 : </span><span>직접 번역한 결과가 나타납니다.</span>
     </div>
-    <pre id="translateDirectResult" class="notranslate">
+    <pre id="translateDirectResult">
     </pre>
-    <div class="translatorHeader">
-    <span class="translatorHeader">중계번역 : </span><span>중간 언어로 번역 후 최종 언어로 번역됩니다.</span>
+    <div>
+    <span>중계번역 : </span><span>중간 언어로 번역 후 최종 언어로 번역됩니다.</span>
     </div>
-    <pre id="translateResult" class="notranslate">
+    <pre id="translateResult">
     </pre>
-    <div class="translatorHeader">
-      <span class="translatorHeader">(참고)중간 언어 번역 : </span><span>중간 언어 번역 결과가 나타납니다.</span>
+    <div>
+      <span>(참고)중간 언어 번역 : </span><span>중간 언어 번역 결과가 나타납니다.</span>
     </div>
-    <pre id="translateInterResult" class="notranslate">
+    <pre id="translateInterResult">
     </pre>
-  </div>
-  <div class="container addthis_toolbox addthis_default_style"
-       addthis:url="https://acidsound.github.com/transplus"
-       addthis:title="여러분이 몰랐던 구글 번역기">
-    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    <a class="addthis_button_tweet"></a>
-    <a class="addthis_button_linkedin_counter"></a>
-    <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    <a class="addthis_counter addthis_pill_style"></a>
-    <a class="pull-left" href="javascript:executeURLLink()">
-      <img class="kakaolink" src="./images/kakaotalk_button_small.png"/>
-    </a>
+	  <div class="container addthis_toolbox addthis_default_style"
+	       addthis:url="https://acidsound.github.com/transplus"
+	       addthis:title="여러분이 몰랐던 구글 번역기">
+	    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	    <a class="addthis_button_tweet"></a>
+	    <a class="addthis_button_linkedin_counter"></a>
+	    <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+	    <a class="addthis_counter addthis_pill_style"></a>
+	    <a href="javascript:executeURLLink()">
+	      <img class="kakaolink" src="./images/kakaotalk_button_small.png"/>
+	    </a>
+	  </div>
   </div>
   <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-  <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52490a34017d8217"></script>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52490a34017d8217"></script>
   <!-- AddThis Button END -->
   <script src="./lib/translate.js"></script>
   <script src="./transplus.js"></script>
@@ -117,6 +110,6 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-  </script>  
+  </script>
 </body>
 </html>
