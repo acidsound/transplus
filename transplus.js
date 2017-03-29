@@ -19,6 +19,7 @@ $("form").on('submit', function(e) {
   $("#translateDirectResult").text("translating....");
   $("#translateResult").text("translating....");
   $("#translateInterResult").text("translating....");
+  $("#diff").text("preparing....");
 
   function diffMatchPath(a,b) {
     var d = dmp.diff_main(a, b);
