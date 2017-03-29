@@ -89,21 +89,33 @@
 		    </pre>
 		  </div>
 	  </div>
-    <div>
-    <span>중계번역 : </span><span>중간 언어로 번역 후 최종 언어로 번역됩니다.</span>
-    </div>
-    <pre id="translateResult">
-    </pre>
-	  <div class="addthis_inline_share_toolbox">
-		  <a id="kakao-link-btn" href="javascript:;" style="display: none;">
-			  <img class="kakaolink" src="./images/kakaotalk.svg" style="width: 42px;margin-left: 2px;float: left;margin-right: 5px;">
-		  </a>
+	  <div class="행">
+		  <div class="열">
+			  <div>
+				  <span>차이점 비교</span>
+			  </div>
+			  <pre id="diff">
+			  </pre>
+		  </div>
+		  <div class="열">
+		    <div>
+		    <span>중계번역 : </span><span>중간 언어로 번역 후 최종 언어로 번역됩니다.</span>
+		    </div>
+		    <pre id="translateResult">
+		    </pre>
+		  </div>
 	  </div>
+  </div>
+  <div class="addthis_inline_share_toolbox">
+	  <a id="kakao-link-btn" href="javascript:;" style="display: none;">
+		  <img class="kakaolink" src="./images/kakaotalk.svg" style="width: 42px;margin-left: 2px;float: left;margin-right: 5px;">
+	  </a>
   </div>
   <!--<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>-->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52490a34017d8217"></script>
   <!-- AddThis Button END -->
   <script src="./lib/translate.js"></script>
+  <script src="./lib/diff_match_patch.js"></script>
   <script src="./transplus.js"></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script type="text/javascript">

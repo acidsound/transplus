@@ -1,3 +1,4 @@
+var dmp = new diff_match_patch();
 $("form").on('submit', function(e) {
   e.preventDefault();
   var message = {
@@ -18,6 +19,14 @@ $("form").on('submit', function(e) {
   $("#translateDirectResult").text("translating....");
   $("#translateResult").text("translating....");
   $("#translateInterResult").text("translating....");
+
+  function diffMatchPath(a,b) {
+    var d = dmp.diff_main(a, b);
+    dmp.diff_cleanupEfficiency(d);
+    var ds = dmp.diff_prettyHtml(d);
+    $("#diff").html(ds);
+  }
+
   Promise.all(message.texts.map(function(text) {
     return translate(text, message.userlang, message.targetlang);
   })).then(function(o) {
@@ -33,6 +42,10 @@ $("form").on('submit', function(e) {
       return translate(text, message.interlang, message.targetlang);
     })).then(function(p) {
       $("#translateInterResult").text(p.join("\n"));
+      diffMatchPath(
+        $("#translateDirectResult").text(),
+        $("#translateInterResult").text()
+      );
     }).catch(function() {
       $("#translateInterResult").text("fail");
     });
