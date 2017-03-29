@@ -1,17 +1,26 @@
 $("form").submit(function() {
   var message = {
-    text: $("#sourceText").val(),
+    texts: $("#sourceText").val().match(/.*\n/g),
     userlang: $("#userLang").val(),
     interlang: $("#interLang").val(),
     targetlang: $("#targetLang").val()
   };
-  translate(message.text, message.userlang, message.targetlang).then(function(o) {
-    $("#translateDirectResult").text(o);
+  $("#translateDirectResult").text("translating....");
+  $("#translateResult").text("translating....");
+  $("#translateInterResult").text("translating....");
+  Promise.all(message.texts.map(function(text) {
+    return translate(text, message.userlang, message.targetlang);
+  })).then(function(o) {
+    $("#translateDirectResult").text(o.join("\n"));
   });
-  translate(message.text, message.userlang, message.interlang).then(function(o) {
-    translate(o, message.interlang, message.targetlang).then(function(p) {
-      $("#translateResult").text(o);
-      $("#translateInterResult").text(p);
+  Promise.all(message.texts.map(function(text) {
+    return translate(text, message.userlang, message.interlang);
+  })).then(function(o) {
+    Promise.all(o.map(function(text) {
+      return translate(text, message.interlang, message.targetlang);
+    })).then(function(p) {
+      $("#translateResult").text(o.join("\n"));
+      $("#translateInterResult").text(p.join("\n"));
     });
   });
   return false;
