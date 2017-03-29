@@ -28,6 +28,6 @@ $().ready(function() {
   $("#sourceText").bind("paste", resizeTextArea);
   $("#sourceText").bind("cut", resizeTextArea);
   $("#sourceText").bind("keydown", resizeTextArea);
-  $("#targetLang").val(navigator.userLanguage || navigator.language || "ko");
+  $("#targetLang").val((navigator.userLanguage || navigator.language || "ko").split("-")[0]);
   $('#sourceText').focus();
 });
