@@ -1,10 +1,20 @@
-$("form").submit(function() {
+$("form").on('submit', function(e) {
+  e.preventDefault();
   var message = {
-    texts: $("#sourceText").val().match(/.*\n/g),
+    texts: $("#sourceText").val().match(/.*[\n]*/g),
     userlang: $("#userLang").val(),
     interlang: $("#interLang").val(),
     targetlang: $("#targetLang").val()
   };
+  // message.texts = message.texts.reduce(function(a,b,i) {
+  //   return i%2 &&
+  //     (typeof a==='string' &&
+  //       [a+b] ||
+  //       (a[a.length-1] = a[a.length-1]+b, a)
+  //     ) ||
+  //     [].concat(a,b);
+  // });
+
   $("#translateDirectResult").text("translating....");
   $("#translateResult").text("translating....");
   $("#translateInterResult").text("translating....");
@@ -12,16 +22,22 @@ $("form").submit(function() {
     return translate(text, message.userlang, message.targetlang);
   })).then(function(o) {
     $("#translateDirectResult").text(o.join("\n"));
+  }).catch(function() {
+    $("#translateDirectResult").text("fail");
   });
   Promise.all(message.texts.map(function(text) {
     return translate(text, message.userlang, message.interlang);
   })).then(function(o) {
+    $("#translateResult").text(o.join("\n"));
     Promise.all(o.map(function(text) {
       return translate(text, message.interlang, message.targetlang);
     })).then(function(p) {
-      $("#translateResult").text(o.join("\n"));
       $("#translateInterResult").text(p.join("\n"));
+    }).catch(function() {
+      $("#translateInterResult").text("fail");
     });
+  }).catch(function() {
+    $("#translateResult").text("fail");
   });
   return false;
 });
